@@ -9,7 +9,9 @@ portfolio = Portfolio()
 prices = []
 
 def run_trade():
-    price = market.tick()
+    data = market.tick()
+
+    price = data["BTC"]
 
     prices.append(price)
 
