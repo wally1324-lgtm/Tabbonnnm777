@@ -1,8 +1,8 @@
 import logging
 from telegram.ext import Application, CommandHandler
 
-from bot.config import TOKEN
-from bot.handlers import start, status, trade, reset, history
+from config import TOKEN
+from handlers import start, status, trade, reset, history
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
