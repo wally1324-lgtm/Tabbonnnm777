@@ -10,7 +10,6 @@ prices = []
 
 def run_trade():
     data = market.tick()
-
     price = data["BTC"]
 
     prices.append(price)
@@ -28,11 +27,11 @@ def run_trade():
     elif signal == "SELL":
         portfolio.sell(price, amount)
 
-    portfolio_value = portfolio.value(price)
+    portfolio_value = portfolio.total_value(price)
 
-    return (
-        price,
-        signal,
-        amount,
-        portfolio_value
-    )
+    # 🔥 STOP LOGIC
+    if portfolio.is_finished(price):
+        portfolio.history.append("🏁 STOP raggiunto")
+        return price, "STOP", amount, portfolio_value
+
+    return price, signal, amount, portfolio_value
