@@ -1,0 +1,56 @@
+from telegram import Update
+from telegram.ext import ContextTypes
+
+from bot.trader import run_trade
+from bot.trader import portfolio
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "🤖 Trading Bot Simulato\n\n"
+        "Capitale iniziale: 1000€\n\n"
+        "Comandi:\n"
+        "/trade\n"
+        "/status\n"
+        "/history\n"
+        "/reset"
+    )
+
+async def trade(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    price, signal, amount, value = run_trade()
+
+    msg = (
+        f"📊 Prezzo: {price}\n"
+        f"📡 Segnale: {signal}\n"
+        f"📦 Quantità: {amount}\n"
+        f"💰 Valore Portafoglio: {value:.2f}€"
+    )
+
+    await update.message.reply_text(msg)
+
+async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        f"💰 Saldo: {portfolio.balance:.2f}€\n"
+        f"📦 Posizione: {portfolio.position}"
+    )
+
+async def history(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not portfolio.history:
+        await update.message.reply_text(
+            "Nessuna operazione registrata."
+        )
+        return
+
+    text = "\n".join(
+        portfolio.history[-10:]
+    )
+
+    await update.message.reply_text(text)
+
+async def reset(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    portfolio.balance = 1000
+    portfolio.position = 0
+    portfolio.history.clear()
+
+    await update.message.reply_text(
+        "🔄 Portafoglio resettato a 1000€"
+    )
