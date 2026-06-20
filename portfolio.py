@@ -25,5 +25,14 @@ class Portfolio:
 
         return False
 
-    def value(self, current_price):
-        return self.balance + self.position * current_price
+  def is_finished(self, current_price):
+
+    value = self.total_value(current_price)
+
+    return (
+
+        value >= self.initial * 1.10 or
+
+        value <= self.initial * 0.90
+
+    )
