@@ -1,8 +1,8 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from bot.trader import run_trade
-from bot.trader import portfolio
+from trader import run_trade
+from trader import portfolio
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
