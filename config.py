@@ -1,0 +1,5 @@
+import os
+
+TOKEN = os.getenv("TELEGRAM_TOKEN")
+
+INITIAL_BALANCE = 1000
