@@ -27,11 +27,6 @@ def run_trade():
     elif signal == "SELL":
         portfolio.sell(price, amount)
 
-    portfolio_value = portfolio.total_value(price)
-
-    # 🔥 STOP LOGIC
-    if portfolio.is_finished(price):
-        portfolio.history.append("🏁 STOP raggiunto")
-        return price, "STOP", amount, portfolio_value
+    portfolio_value = portfolio.value(price)
 
     return price, signal, amount, portfolio_value
