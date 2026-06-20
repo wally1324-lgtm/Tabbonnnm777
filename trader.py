@@ -1,7 +1,7 @@
-from data.market import Market
-from bot.strategy import generate_signal
-from bot.risk import position_size
-from bot.portfolio import Portfolio
+from market import Market
+from strategy import generate_signal
+from risk import position_size
+from portfolio import Portfolio
 
 market = Market()
 portfolio = Portfolio()
