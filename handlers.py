@@ -23,7 +23,14 @@ async def trade(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"📡 Segnale: {signal}\n"
         f"📦 Quantità: {amount}\n"
         f"💰 Valore Portafoglio: {value:.2f}€"
+    ) if signal == "STOP":
+    msg = (
+        f"🏁 STOP RAGGIUNTO\n\n"
+        f"📊 Prezzo: {price}\n"
+        f"💰 Valore finale: {value:.2f}€\n"
     )
+    await update.message.reply_text(msg)
+    return
 
     await update.message.reply_text(msg)
 
